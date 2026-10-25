@@ -1,0 +1,31 @@
+# Secrets — never commit (lesson learned from Cascada)
+.env
+.env.*
+!.env.example
+
+# Python
+venv*/
+.venv*/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Audio, models, datasets with real voices
+recordings/
+models/
+data/raw/
+*.wav
+*.m4a
+*.mp3
+*.nemo
+
+# Logs & runtime output
+logs/
+*.log
+results/
+
+# IDE / OS
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
