@@ -98,6 +98,26 @@ Ohne brauchbare Erkennung ist alles andere wertlos. Daher zuerst, rein textbasie
 - [ ] Eval-Skript: Jev vs. Claude Haiku vs. Kombination — Precision/Recall pro Typ, Latenz p50/p95, Kosten
 - [ ] Prompt-/Fragen-Design für Jev (Noul pro Typ vs. eine Choice-Frage)
 
+Datenformat eines Testfalls (`data/eval/*.jsonl`, eine Zeile pro Fall; Vorschlag, beim Umsetzen anpassbar):
+
+```json
+{
+  "id": "klima-007",
+  "topic": "Soll Deutschland ein Tempolimit auf Autobahnen einführen?",
+  "context": [
+    {"speaker": "A", "text": "Ein Tempolimit würde den CO2-Ausstoß messbar senken."},
+    {"speaker": "B", "text": "Das bringt laut Umweltbundesamt nur wenige Millionen Tonnen."}
+  ],
+  "target": {"speaker": "A", "text": "Sie fahren doch selbst einen SUV, Sie haben gar kein Recht, da mitzureden."},
+  "labels": ["tu_quoque", "ad_hominem"],
+  "rationale": "Angriff auf das Verhalten der Person statt auf die Zahl des UBA."
+}
+```
+
+`labels` ist leer (`[]`) für Fälle ohne Scheinargument. Typ-Bezeichner: `ad_hominem`, `ad_populum`,
+`ad_verecundiam`, `false_dilemma`, `slippery_slope`, `post_hoc`, `ad_ignorantiam`, `tu_quoque`,
+`strawman`, `red_herring`.
+
 **Exit-Kriterium:** Für mindestens 5 der 10 Typen Precision ≥ 0,8 bei Recall ≥ 0,5; Jev-Latenz p95 < 300 ms.
 Sonst: Taxonomie auf erkennbare Typen reduzieren oder Ansatz überdenken.
 
